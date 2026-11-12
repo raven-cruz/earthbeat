@@ -4,14 +4,21 @@
 - MVP: a cool orb representing the planet at a given time
 - best: a tool that can be used to get accurate conditions for a given date, past or future (weather and lighting especially)
 
+**Current state**: extracts historical temperatures using [NOAA's 20th Centural Reanalysis Project](https://psl.noaa.gov/data/20thC_Rean)
+
 ### How to use
-> 11/12/26
+> Instructions as of 11/12/26 (WIP)
 
 Currently, the testing code only runs locally.
 
-In `terminal` run:
+In `terminal` run these commands to install requirements and run the test code:
 
-``` % python test.py ```
+``` 
+pip install -r requirements.txt
+python test.py 
+```
+
+Make sure to follow input formatting exactly. Date range is currently 1805-2015.
 
 ### AI use disclosure
 #### "Too Many Requests" fix
