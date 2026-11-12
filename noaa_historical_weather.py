@@ -15,21 +15,28 @@ def open_air_temperature_dataset(timestamp, directory, filename):
 
 def get_air_temperature(latitude, longitude, timestamp, directory, filename, dataset=None):
     if dataset is None:
-        with open_air_temperature_dataset(timestamp, directory, filename) as dataset:
-            longitude_min = float(dataset["lon"].min().item())
-        
-            # normalize longitude to match dataset range
-            if longitude_min >= 0:
-                longitude %= 360
-            else:
-                longitude = (longitude + 180) % 360 - 180
-
-            temperature = dataset["air"].sel(
-                time = timestamp,
-                lat = latitude,
-                lon = longitude,
-                method = "nearest",
+        with open_air_temperature_dataset(timestamp, directory, filename) as opened_dataset:
+            return get_air_temp_from_dataset(
+                opened_dataset, latitude, longitude, timestamp
             )
-        
+
+    return get_air_temp_from_dataset(dataset, latitude, longitude, timestamp)
+
+def get_air_temp_from_dataset(dataset, latitude, longitude, timestamp):
+    longitude_min = float(dataset["lon"].min().item())
+
+    # normalize longitude to match dataset range
+    if longitude_min >= 0:
+        longitude %= 360
+    else:
+        longitude = (longitude + 180) % 360 - 180
+
+    temperature = dataset["air"].sel(
+        time = timestamp,
+        lat = latitude,
+        lon = longitude,
+        method = "nearest",
+    )
+
     # (KELVIN − 273.15) × 9/5 + 32 = FARENHEIT
     return (float(temperature.item()) - 273.15) * 9 / 5 + 32
