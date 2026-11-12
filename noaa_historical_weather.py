@@ -15,8 +15,7 @@ import xarray as xr
 BASE_URL = "https://psl.noaa.gov/thredds/dodsC/Datasets/20thC_ReanV3"
 
 MAX_OPEN_DATASETS = 4
-MAX_RETRIES = 3
-
+MAX_RETRIES = 6
 
 datasets = OrderedDict()        # reuse open remote datasets
 noaa_lock = threading.RLock()   # serialize noaa requests
@@ -53,7 +52,7 @@ def is_rate_limited(error):
         if getattr(current, "code", None) == 429: return True
 
         message = str(current).lower()
-        if "429" in message or "too many requests" in message:
+        if "429" in message or "too many requests" in message or "-77" in message:
             return True
 
         current = current.__cause__ or current.__context__
@@ -62,7 +61,7 @@ def is_rate_limited(error):
 
 # retry rate-limited requests w/ exponential backoff
 # written by GPT 6 Luna
-def retry_429(operation):
+def retry(operation):
     for attempt in range(MAX_RETRIES + 1):
         try:
             return operation()
@@ -98,7 +97,7 @@ def _cached_temperature(latitude, longitude, timestamp, directory, filename):
                 dataset, latitude, longitude, timestamp
             )
 
-    return retry_429(fetch)
+    return retry(fetch)
 
 # return temp in fahrenheit
 def get_air_temperature(latitude, longitude, timestamp, directory, filename, dataset=None):
@@ -107,7 +106,7 @@ def get_air_temperature(latitude, longitude, timestamp, directory, filename, dat
     if dataset is None:
         return _cached_temperature(latitude, longitude, timestamp, directory, filename)
 
-    return retry_429(
+    return retry(
         lambda: get_air_temp_from_dataset(dataset, latitude, longitude, timestamp)
     )
 
