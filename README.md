@@ -9,7 +9,7 @@
 ### How to use
 > Instructions as of 11/12/26 (WIP)
 
-Currently, the testing code only runs locally.
+Currently, the testing code only runs locally, with `Python 3.15.2`.
 
 In `terminal` run these commands to install requirements and run the test code:
 
