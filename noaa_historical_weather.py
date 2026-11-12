@@ -31,6 +31,7 @@ def open_air_temperature_dataset(timestamp, directory, filename):
 
         suffix = "SI" if timestamp.year <= 1980 else "MO"
         url = f"{BASE_URL}/{directory}{suffix}/{filename}.{timestamp.year}.nc"
+        print(url)
 
         dataset = xr.open_dataset(url, engine="netcdf4")
         datasets[key] = dataset
@@ -102,6 +103,7 @@ def _cached_temperature(latitude, longitude, timestamp, directory, filename):
 # return temp in fahrenheit
 def get_air_temperature(latitude, longitude, timestamp, directory, filename, dataset=None):
     longitude %= 360
+    print(latitude, longitude)
 
     if dataset is None:
         return _cached_temperature(latitude, longitude, timestamp, directory, filename)
