@@ -1,3 +1,4 @@
 keys/
 .venv/
 .DS_Store
+*.pyc
