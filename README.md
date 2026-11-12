@@ -4,6 +4,15 @@
 - MVP: a cool orb representing the planet at a given time
 - best: a tool that can be used to get accurate conditions for a given date, past or future (weather and lighting especially)
 
+### How to use
+> 11/12/26
+
+Currently, the testing code only runs locally.
+
+In `terminal` run:
+
+``` % python test.py ```
+
 ### AI use disclosure
 #### "Too Many Requests" fix
 > GitHub Copilot, GPT-6 Luna
