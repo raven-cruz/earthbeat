@@ -1,8 +1,8 @@
 ## Atmosphere Visualizer
 >Goal: Use real weather and geological data to create a generative visualizer.
 
-    - MVP: a cool orb representing the planet at a given time
-    - best: a tool that can be used to get accurate conditions for a given date, past or future (weather and lighting especially)
+- MVP: a cool orb representing the planet at a given time
+- best: a tool that can be used to get accurate conditions for a given date, past or future (weather and lighting especially)
 
 ### AI use disclosure
 #### "Too Many Requests" fix
