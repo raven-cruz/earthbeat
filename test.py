@@ -39,4 +39,4 @@ def test_noaa_no_inputs():
 
     print(f"air temperature on {date} at {time}: {temp_f:.1f} F")
 
-test_noaa_no_inputs()
+test_noaa_with_inputs()
