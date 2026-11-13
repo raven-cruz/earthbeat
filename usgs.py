@@ -1,5 +1,6 @@
 import requests
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # earthquakes from the past 24 hours
 url = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
@@ -24,3 +25,19 @@ for quake in data["features"]:
 
 df = pd.DataFrame(earthquakes)
 print(df.head(10))
+
+# TEMP VISUALIZER
+plt.figure()
+plt.scatter(
+    df["longitude"],
+    df["latitude"],
+    s=df["magnitude"] ** 2,
+    c=df["depth_km"],
+    cmap="rainbow_r",
+)
+
+plt.colorbar(label="depth (km)")
+plt.xlabel("longitude")
+plt.ylabel("latitude")
+plt.title("earthquakes in the past 24 hours")
+plt.show()
