@@ -27,9 +27,9 @@ def test_noaa_no_inputs():
     filename = "air.2m"
 
     lat = 40
-    lon = 74
-    date = "1900-01-01"
-    time = "00:00"
+    lon = -74
+    date = "2000-08-26"
+    time = "15:00"
 
     timestamp = datetime.strptime(f"{date} {time}", "%Y-%m-%d %H:%M")
     with open_air_temperature_dataset(timestamp, directory, filename) as dataset:
@@ -39,4 +39,4 @@ def test_noaa_no_inputs():
 
     print(f"air temperature on {date} at {time}: {temp_f:.1f} F")
 
-test_noaa_with_inputs()
+test_noaa_no_inputs()
