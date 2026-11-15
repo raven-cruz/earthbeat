@@ -5,7 +5,7 @@ from pathlib import Path
 from zoneinfo import ZoneInfo
 from astral import Observer
 from astral.sun import elevation, azimuth
-from utils.weather import fetch_current_weather, normalize_weather
+from utils.weather import fetch_weather, normalize_weather
 
 def calculate_brightness(sun_elevation):
     # DIRECT SUN: 0 at horizon, 1 at 60deg
@@ -59,8 +59,6 @@ def visualize_light_colors(sun_color, sky_color):
     plt.tight_layout()
     plt.show()
 
-
-
 def calculate_lighting():
     ### INPUT ###
     latitude = float(input("latitude: ") or 40.0)
@@ -86,8 +84,8 @@ def calculate_lighting():
     sun_color, sky_color = calculate_light_colors(sun_elevation)
 
     ### WEATHER ###
-    weather_data = fetch_current_weather(latitude, longitude)
-    weather = normalize_weather(weather_data)
+    record, source, weather_time = fetch_weather(latitude, longitude, local_datetime)
+    weather = normalize_weather(record, source, weather_time)
 
     # affects lighting
     cloud = weather["cloud_cover"] / 100    # convert cloud cover from 0–100 to 0–1
