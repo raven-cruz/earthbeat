@@ -65,7 +65,7 @@ def main():
     latitude = 40.7128
     longitude = -74.0060
     date = "2026-11-14"
-    time = "15:30"
+    time = "18:30"
     timezone_name = "America/New_York"
 
     local_datetime = datetime.strptime(
@@ -98,6 +98,7 @@ def main():
     }
 
     lighting = {
+        "id": f"{date} {time}_{latitude},{longitude}",
         "sun_elevation": sun_elevation,
         "sun_azimuth": sun_azimuth,
         "sun_intensity": sun_intensity,

@@ -80,7 +80,7 @@ scene.render.resolution_x = 800
 scene.render.resolution_y = 500
 scene.render.resolution_percentage = 100
 scene.render.image_settings.file_format = "PNG"
-scene.render.filepath = str(render_dir / "render.png")
+scene.render.filepath = str(render_dir / f"render_{lighting['id']}.png")
 
 bpy.ops.render.render(write_still=True)
 print(f"saved {scene.render.filepath}")
