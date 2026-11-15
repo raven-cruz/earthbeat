@@ -1,6 +1,6 @@
 # RUN THIS:
 # blender --background --python scene.py
-
+import json
 import math
 from pathlib import Path
 
@@ -8,6 +8,10 @@ import bpy
 from mathutils import Vector
 
 render_dir = Path.cwd() / "renders"
+
+# load lighting data
+with open(render_dir / "lighting.json") as f:
+    lighting = json.load(f)
 
 # blank scene
 bpy.ops.object.select_all(action="SELECT")
@@ -31,13 +35,25 @@ cube_material = bpy.data.materials.new("cube mat")
 cube_material.diffuse_color = (0.86, 0.88, 0.90, 1.0)
 cube.data.materials.append(cube_material)
 
-# TEMP fixed sunlight
+# sunlight
 bpy.ops.object.light_add(type="SUN", location=(0, 0, 5))
 sun = bpy.context.object
 sun.name = "sun"
-sun.rotation_euler = (math.radians(40), math.radians(-25), math.radians(25))
-sun.data.energy = 2.0
-sun.data.angle = math.radians(2.0)  # Slightly softened shadows.
+
+elevation = math.radians(lighting["sun_elevation"])
+azimuth = math.radians(lighting["sun_azimuth"])
+
+# convert sun dir to blender coords
+sun_direction = Vector((
+    math.cos(elevation) * math.sin(azimuth),
+    math.cos(elevation) * math.cos(azimuth),
+    math.sin(elevation)
+))
+
+sun.rotation_euler = (-sun_direction).to_track_quat("-Z", "Y").to_euler()
+sun.data.energy = lighting["sun_intensity"] * 2.0
+sun.data.color = lighting["sun_color"]
+sun.data.angle = math.radians(2.0)
 
 # sky light
 world = bpy.context.scene.world

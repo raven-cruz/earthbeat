@@ -4,6 +4,8 @@ from zoneinfo import ZoneInfo
 from astral import Observer
 from astral.sun import elevation, azimuth
 import matplotlib.pyplot as plt
+import json
+from pathlib import Path
 
 def calculate_brightness(sun_elevation):
     # DIRECT SUN: 0 at horizon, 1 at 60deg
@@ -63,7 +65,7 @@ def main():
     latitude = 40.7128
     longitude = -74.0060
     date = "2026-11-14"
-    time = "18:30"
+    time = "07:30"
     timezone_name = "America/New_York"
 
     local_datetime = datetime.strptime(
@@ -94,6 +96,21 @@ def main():
         "sun_color": sun_color,
         "sky_color": sky_color
     }
+
+    lighting = {
+        "sun_elevation": sun_elevation,
+        "sun_azimuth": sun_azimuth,
+        "sun_intensity": sun_intensity,
+        "sky_brightness": sky_brightness,
+        "sun_color": sun_color,
+        "sky_color": sky_color
+    }
+
+    # save lighting stuff to json for blender renderer
+    render_dir = Path("renders")
+    with open(render_dir / "lighting.json", "w") as f:
+        json.dump(lighting, f, indent=2)
+
 
     print(scene)
     visualize_light_colors(sun_color, sky_color)
