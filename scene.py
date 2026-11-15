@@ -23,7 +23,8 @@ ground = bpy.context.object
 ground.name = "ground"
 
 ground_material = bpy.data.materials.new("ground mat")
-ground_material.diffuse_color = (0.52, 0.56, 0.62, 1.0)
+bsdf = ground_material.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (0.25, 0.3, 0.35, 1.0)
 ground.data.materials.append(ground_material)
 
 # cube rests on ground
@@ -32,7 +33,8 @@ cube = bpy.context.object
 cube.name = "test cube"
 
 cube_material = bpy.data.materials.new("cube mat")
-cube_material.diffuse_color = (0.86, 0.88, 0.90, 1.0)
+bsdf = cube_material.node_tree.nodes.get("Principled BSDF")
+bsdf.inputs["Base Color"].default_value = (0.86, 0.88, 0.90, 1.0)
 cube.data.materials.append(cube_material)
 
 ### SUNLIGHT ###
