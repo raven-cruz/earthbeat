@@ -1,5 +1,6 @@
 keys/
-.venv/
+venv/
 .DS_Store
 *.pyc
+__pycache__/
 renders/
