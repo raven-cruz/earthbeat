@@ -56,7 +56,7 @@ sun_direction = Vector((
 sun.rotation_euler = (-sun_direction).to_track_quat("-Z", "Y").to_euler()
 sun.data.energy = lighting["sun_intensity"] * 2.0
 sun.data.color = lighting["sun_color"]
-sun.data.angle = math.radians(2.0)
+sun.data.angle = math.radians(lighting["shadow_angle"])
 
 ### SKY LIGHT ###
 world = bpy.context.scene.world
