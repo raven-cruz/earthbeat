@@ -31,6 +31,20 @@ cube_material = bpy.data.materials.new("cube mat")
 cube_material.diffuse_color = (0.86, 0.88, 0.90, 1.0)
 cube.data.materials.append(cube_material)
 
+# TEMP fixed sunlight
+bpy.ops.object.light_add(type="SUN", location=(0, 0, 5))
+sun = bpy.context.object
+sun.name = "sun"
+sun.rotation_euler = (math.radians(40), math.radians(-25), math.radians(25))
+sun.data.energy = 2.0
+sun.data.angle = math.radians(2.0)  # Slightly softened shadows.
+
+# sky light
+world = bpy.context.scene.world
+background = world.node_tree.nodes.get("Background")
+background.inputs["Color"].default_value = (0.65, 0.76, 0.95, 1.0)
+background.inputs["Strength"].default_value = 0.5
+
 # camera points at center of cube
 bpy.ops.object.camera_add(location=(7, -9, 6))
 camera = bpy.context.object
