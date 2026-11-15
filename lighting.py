@@ -62,11 +62,11 @@ def visualize_light_colors(sun_color, sky_color):
 
 
 def main():
-    latitude = 40.7128
-    longitude = -74.0060
-    date = "2026-11-14"
-    time = "18:30"
-    timezone_name = "America/New_York"
+    latitude = float(input("latitude: "))
+    longitude = float(input("longitude: "))
+    date = input("date (YYYY-MM-DD): ")
+    time = input("time (HH:MM): ")
+    timezone_name = input("timezone (e.g., America/New_York): ")
 
     local_datetime = datetime.strptime(
         f"{date} {time}", "%Y-%m-%d %H:%M"
