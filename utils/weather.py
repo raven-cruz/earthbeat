@@ -16,3 +16,18 @@ def fetch_current_weather(latitude, longitude):
 
     response.raise_for_status()
     return response.json()
+
+
+def normalize_weather(weather_data):
+    current = weather_data["current"]
+
+    return {
+        "condition": current["condition"]["text"],
+        "temperature_c": current["temp_c"],
+        "cloud_cover": current["cloud"],
+        "precipitation_mm": current["precip_mm"],
+        "visibility_km": current["vis_km"],
+        "humidity": current["humidity"],
+        "wind_kph": current["wind_kph"],
+        "observed_at": current["last_updated"]
+    }
