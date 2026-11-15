@@ -8,6 +8,7 @@ import bpy
 from mathutils import Vector
 
 render_dir = Path.cwd() / "renders"
+render_dir.mkdir(exist_ok=True)
 
 # load lighting data
 with open(render_dir / "lighting.json") as f:
