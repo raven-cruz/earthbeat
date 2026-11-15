@@ -65,7 +65,7 @@ def main():
     latitude = 40.7128
     longitude = -74.0060
     date = "2026-11-14"
-    time = "07:30"
+    time = "15:30"
     timezone_name = "America/New_York"
 
     local_datetime = datetime.strptime(
@@ -113,6 +113,6 @@ def main():
 
 
     print(scene)
-    visualize_light_colors(sun_color, sky_color)
+    # visualize_light_colors(sun_color, sky_color)
 
 main()

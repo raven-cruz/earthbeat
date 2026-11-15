@@ -35,7 +35,7 @@ cube_material = bpy.data.materials.new("cube mat")
 cube_material.diffuse_color = (0.86, 0.88, 0.90, 1.0)
 cube.data.materials.append(cube_material)
 
-# sunlight
+### SUNLIGHT ###
 bpy.ops.object.light_add(type="SUN", location=(0, 0, 5))
 sun = bpy.context.object
 sun.name = "sun"
@@ -55,12 +55,14 @@ sun.data.energy = lighting["sun_intensity"] * 2.0
 sun.data.color = lighting["sun_color"]
 sun.data.angle = math.radians(2.0)
 
-# sky light
+### SKY LIGHT ###
 world = bpy.context.scene.world
 background = world.node_tree.nodes.get("Background")
-background.inputs["Color"].default_value = (0.65, 0.76, 0.95, 1.0)
-background.inputs["Strength"].default_value = 0.5
 
+background.inputs["Color"].default_value = (*lighting["sky_color"], 1.0)
+background.inputs["Strength"].default_value = (lighting["sky_brightness"] * 0.5)
+
+### CAMERA ###
 # camera points at center of cube
 bpy.ops.object.camera_add(location=(7, -9, 6))
 camera = bpy.context.object
