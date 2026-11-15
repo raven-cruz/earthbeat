@@ -4,7 +4,7 @@
 - MVP: a cool orb representing the planet at a given time
 - best: a tool that can be used to get accurate conditions for a given date, past or future (weather and lighting especially)
 
-**Current state:** Takes a date, time, and location to calculate sun position, intensity, and color, then uses those values to generate a basic lighting preview in Blender. Currently supports sunlight and ambient sky lighting; weather and moonlight integration are planned.
+**Current state:** Takes a date, time, and location to calculate sun position, intensity, and color, then uses those values to generate a basic lighting preview in Blender. Currently supports sunlight and ambient sky lighting, with cloud cover affecting lighting; additional weather and moonlight integration are planned.
 
 ### Setup
 
